@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import Button from "../shared/Button.svelte";
+import Card from "../shared/Card.svelte";
   export let phrases = [];
   export let words = [];
   // export let categories = [];
@@ -58,7 +59,7 @@
     text-align: left;
   }
 
-  .form-field {
+  .form-field, select {
     margin: 18px auto;
   }
 
@@ -74,54 +75,56 @@
   }
 </style>
 
-<form on:submit|preventDefault={handleSubmit}>
-  <h1>
-    {fields.phrase1.direction === 'left' ? fields.word1 && fields.word1.word : fields.phrase1 && fields.phrase1.body}
-    {fields.phrase1.direction === 'right' ? fields.word1 && fields.word1.word : fields.phrase1 && fields.phrase1.body}{fields.middleWord && fields.middleWord === ', ' ? `${fields.middleWord}` : ` ${fields.middleWord} `}
-    {fields.phrase2.direction === 'left' ? fields.word2 && fields.word2.word : fields.phrase2 && fields.phrase2.body}
-    {fields.phrase2.direction === 'right' ? fields.word2 && fields.word2.word : fields.phrase2 && fields.phrase2.body}
-  </h1>
-  <div class="form-field">
-    <label for="phrase1">Phrase:</label>
-    <select id="phrase1" bind:value={fields.phrase1}>
-      <option value="">Select Phrase</option>
-      {#each phrases as phrase}
-        <option id={phrases._id} value={phrase}>{phrase.body}</option>
-      {/each}
-    </select>
-    <div class="error">{errors.phrase1}</div>
-    <label for="word1">Word:</label>
-    <select id="word1" bind:value={fields.word1}>
-      <option value="">Select Word</option>
-      {#each words as word}
-        <option id={word._id} value={word}>{word.word}</option>
-      {/each}
-    </select>
-    <div class="error">{errors.word1}</div>
-    
-    <select id="middleWord" bind:value={fields.middleWord}>
-      <option value="">Select Word</option>
-      {#each middleWords as mid}
-        <option value={mid}>{mid}</option>
-      {/each}
-    </select>
-
-    <label for="phrase2">Phrase:</label>
-    <select id="phrase2" bind:value={fields.phrase2}>
-      <option value="">Select Phrase</option>
-      {#each phrases as phrase}
-        <option id={phrases._id} value={phrase}>{phrase.body}</option>
-      {/each}
-    </select>
-    <div class="error">{errors.phrase2}</div>
-    <label for="word1">Word:</label>
-    <select id="word1" bind:value={fields.word2}>
-      <option value="">Select Word</option>
-      {#each words as word}
-        <option id={word._id} value={word}>{word.word}</option>
-      {/each}
-    </select>
-    <div class="error">{errors.word2}</div>
-  </div>
-  <!-- <Button type="secondary" flat={true}>Add Phrase</Button> -->
-</form>
+<Card>
+  <form on:submit|preventDefault={handleSubmit}>
+    <h1>
+      {fields.phrase1.direction === 'left' ? fields.word1 && fields.word1.word : fields.phrase1 && fields.phrase1.body}
+      {fields.phrase1.direction === 'right' ? fields.word1 && fields.word1.word : fields.phrase1 && fields.phrase1.body}{fields.middleWord && fields.middleWord === ', ' ? `${fields.middleWord}` : ` ${fields.middleWord} `}
+      {fields.phrase2.direction === 'left' ? fields.word2 && fields.word2.word : fields.phrase2 && fields.phrase2.body}
+      {fields.phrase2.direction === 'right' ? fields.word2 && fields.word2.word : fields.phrase2 && fields.phrase2.body}
+    </h1>
+    <div class="form-field">
+      <label for="phrase1">Phrase:</label>
+      <select id="phrase1" bind:value={fields.phrase1}>
+        <option value="">Select Phrase</option>
+        {#each phrases as phrase}
+          <option id={phrases._id} value={phrase}>{phrase.body}</option>
+        {/each}
+      </select>
+      <div class="error">{errors.phrase1}</div>
+      <label for="word1">Word:</label>
+      <select id="word1" bind:value={fields.word1}>
+        <option value="">Select Word</option>
+        {#each words as word}
+          <option id={word._id} value={word}>{word.word}</option>
+        {/each}
+      </select>
+      <div class="error">{errors.word1}</div>
+      
+      <select id="middleWord" bind:value={fields.middleWord}>
+        <option value="">Select Word</option>
+        {#each middleWords as mid}
+          <option value={mid}>{mid}</option>
+        {/each}
+      </select>
+  
+      <label for="phrase2">Phrase:</label>
+      <select id="phrase2" bind:value={fields.phrase2}>
+        <option value="">Select Phrase</option>
+        {#each phrases as phrase}
+          <option id={phrases._id} value={phrase}>{phrase.body}</option>
+        {/each}
+      </select>
+      <div class="error">{errors.phrase2}</div>
+      <label for="word1">Word:</label>
+      <select id="word1" bind:value={fields.word2}>
+        <option value="">Select Word</option>
+        {#each words as word}
+          <option id={word._id} value={word}>{word.word}</option>
+        {/each}
+      </select>
+      <div class="error">{errors.word2}</div>
+    </div>
+    <!-- <Button type="secondary" flat={true}>Add Phrase</Button> -->
+  </form>  
+</Card>

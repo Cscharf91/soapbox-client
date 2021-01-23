@@ -97,7 +97,7 @@
 </script>
 
 <main>
-	<h1>Word/Category Creator</h1>
+	<h1>Soapstone</h1>
 	<Tabs {activeItem} {items} on:tabChange={handleTabChange} />
 	{#if activeItem === 'Categories'}
 		<CreateCategoryForm on:add={handleAddCat} />
@@ -120,6 +120,11 @@
 		text-transform: uppercase;
 		text-align: center;
 		font-size: 4em;
-		font-weight: 100;
+	}
+
+	@media(max-width: 500px) {
+		h1 {
+			font-size: 2.5em;
+		}
 	}
 </style>

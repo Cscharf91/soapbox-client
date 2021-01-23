@@ -66,6 +66,13 @@
     font-size: 12px;
     color: #d91b42;
   }
+
+  @media(max-width: 500px) {
+    input {
+      height: 30px;
+      width: 60%;
+    }
+  }
 </style>
 
 <form on:submit|preventDefault={handleSubmit}>

@@ -42,7 +42,7 @@
   }
 
   label {
-    margin: 10px auto;
+    margin: 20px auto;
     text-align: left;
   }
 
@@ -51,13 +51,22 @@
     font-size: 12px;
     color: #d91b42;
   }
+
+	@media(max-width: 500px) {
+    input {
+      height: 30px;
+      width: 60%;
+    }
+  }
 </style>
 
 <form on:submit|preventDefault={handleSubmit}>
   <div class="form-field">
     <label for="body">Body:</label>
     <input type="text" id="body" bind:value={fields.body} />
-    <label for="direction">Word is filled in before or after phrase:</label>
+  </div>
+  <div class="form-field">
+    <label for="direction">Word before or after phrase:</label>
     <select id="direction" bind:value={fields.direction}>
       <option value="right">After</option>
       <option value="left">Before</option>

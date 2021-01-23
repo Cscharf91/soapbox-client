@@ -30,6 +30,13 @@
     color: #555;
     cursor: pointer;
   }
+
+	@media(max-width: 500px) {
+    ul {
+      flex-wrap: wrap;
+      margin: 25px;
+    }
+  }
 </style>
 
 <div class="tabs">
