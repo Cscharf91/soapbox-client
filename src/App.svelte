@@ -13,8 +13,8 @@
 	let items = ['Soapstone', 'Categories', 'Words', 'Phrases'];
 	let activeItem = 'Soapstone';
 	
-	// let API = 'https://stormy-fortress-52595.herokuapp.com/api';
-	let API = 'http://localhost:5000/api';
+	let API = 'https://stormy-fortress-52595.herokuapp.com/api';
+	// let API = 'http://localhost:5000/api';
 
 	let words = [];
 	let categories = [];
