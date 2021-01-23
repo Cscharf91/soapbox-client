@@ -79,10 +79,13 @@
     <select id="type" bind:value={fields.type}>
       <option value="">Select Type</option>
       <option value="noun">Noun</option>
+      <option value="proper noun">Proper Noun</option>
       <option value="pronoun">Pronoun</option>
       <option value="verb">Verb</option>
       <option value="adjective">Adjective</option>
       <option value="adverb">Adverb</option>
+      <option value="action verb">Action Verb</option>
+      <option value="linking verb">Linking Verb</option>
     </select>
     <div class="error">{errors.type}</div>
   </div>

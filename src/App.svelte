@@ -10,7 +10,7 @@ import CreateWordForm from './components/CreateWordForm.svelte';
 	let items = ['Categories', 'Words'];
 	let activeItem = 'Categories';
 	
-	let API = 'http://localhost:5000/api';
+	let API = 'https://stormy-fortress-52595.herokuapp.com/api';
 
 	let words = [];
 	let categories = [];
@@ -20,6 +20,7 @@ import CreateWordForm from './components/CreateWordForm.svelte';
 		const wordRes = await fetch(`${API}/words`);
 		categories = await catRes.json();
 		words = await wordRes.json();
+		console.log(words);
 	})
 
 	const handleTabChange = (e) => {
