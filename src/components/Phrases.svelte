@@ -1,16 +1,15 @@
 <script>
   import Button from "../shared/Button.svelte";
   import Card from "../shared/Card.svelte";
-  export let categories = [];
+  export let phrases = [];
   export let API;
   import { createEventDispatcher } from "svelte";
-	import { onMount } from 'svelte';
 
   let dispatch = createEventDispatcher();
 
-  const deleteCat = async (id) => {
+  const deletePhrase = async (id) => {
     try {
-      await fetch(`${API}/categories/${id}`, {
+      await fetch(`${API}/phrases/${id}`, {
         method: 'DELETE',
       });
       dispatch('DELETE', id);
@@ -21,18 +20,18 @@
 </script>
 
 <Card>
-  <h1>Categories:</h1>
+  <h1>Phrases:</h1>
   <table>
     <tr>
-      <th>Name</th>
+      <th>Body</th>
       <th>Options</th>
     </tr>
-    {#each categories as category}
+    {#each phrases as phrase}
       <tr>
-        <td>{category.name}</td>
+      <td>{phrase.direction === 'left' ? '___' : ''} {phrase.body} {phrase.direction === 'right' ? '___' : ''}</td>
         <td>
-          <form on:submit|preventDefault={() => deleteCat(category._id)}>
-            <Button type="primary">Delete Category</Button>
+          <form on:submit|preventDefault={() => deletePhrase(phrase._id)}>
+            <Button type="primary">Delete Phrase</Button>
           </form>
         </td>
       </tr>

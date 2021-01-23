@@ -29,7 +29,7 @@
   <select bind:value={filter}>
     <option value="">None</option>
     {#each categories as category}
-      <option value={category._id}>{category.name.toLowerCase()}</option>
+      <option value={category._id}>{category.name}</option>
     {/each}
   </select>
   <table>
@@ -41,9 +41,9 @@
     </tr>
     {#each filteredWords as word}
       <tr>
-        <td>{word.word.toLowerCase()}</td>
+        <td>{word.word}</td>
         <td>{word.type}</td>
-        <td>{word.category.name.toLowerCase()}</td>
+        <td>{word.category.name}</td>
         <td>
           <form on:submit|preventDefault={() => deleteWord(word._id)}>
             <Button type="primary">Delete Word</Button>
