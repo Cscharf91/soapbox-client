@@ -77,7 +77,7 @@
 <form on:submit|preventDefault={handleSubmit}>
   <h1>
     {fields.phrase1.direction === 'left' ? fields.word1 && fields.word1.word : fields.phrase1 && fields.phrase1.body}
-    {fields.phrase1.direction === 'right' ? fields.word1 && fields.word1.word : fields.phrase1 && fields.phrase1.body}{fields.middleWord && fields.middleWord === ',' ? `${fields.middleWord}` : ` ${fields.middleWord}`}
+    {fields.phrase1.direction === 'right' ? fields.word1 && fields.word1.word : fields.phrase1 && fields.phrase1.body}{fields.middleWord && fields.middleWord === ', ' ? `${fields.middleWord}` : ` ${fields.middleWord} `}
     {fields.phrase2.direction === 'left' ? fields.word2 && fields.word2.word : fields.phrase2 && fields.phrase2.body}
     {fields.phrase2.direction === 'right' ? fields.word2 && fields.word2.word : fields.phrase2 && fields.phrase2.body}
   </h1>
