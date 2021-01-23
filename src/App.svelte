@@ -97,7 +97,9 @@
 </script>
 
 <main>
-	<h1>Soapstone</h1>
+	<div class="hero">
+		<h1>Soapstone</h1>
+	</div>
 	<Tabs {activeItem} {items} on:tabChange={handleTabChange} />
 	{#if activeItem === 'Categories'}
 		<CreateCategoryForm on:add={handleAddCat} />
@@ -114,6 +116,12 @@
 </main>
 
 <style>
+	.hero {
+		width: 100%;
+		padding-top: 75px;
+		padding-bottom: 20px;
+		background: rgb(248, 248, 248);
+	}
 
 	h1 {
 		color: #003a86;
