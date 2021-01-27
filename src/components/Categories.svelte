@@ -1,10 +1,10 @@
 <script>
   import Button from "../shared/Button.svelte";
   import Card from "../shared/Card.svelte";
-  export let categories = [];
-  export let API;
   import { createEventDispatcher } from "svelte";
-	import { onMount } from 'svelte';
+  export let API;
+
+  import { categories } from '../Stores.js';
 
   let dispatch = createEventDispatcher();
 
@@ -27,7 +27,7 @@
       <th>Name</th>
       <th>Options</th>
     </tr>
-    {#each categories as category}
+    {#each $categories as category(category._id)}
       <tr>
         <td>{category.name}</td>
         <td>

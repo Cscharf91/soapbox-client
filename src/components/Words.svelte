@@ -1,13 +1,12 @@
 <script>
   import Card from "../shared/Card.svelte";
-  export let categories;
-  export let words = [];
   export let API;
   import { createEventDispatcher } from "svelte";
   import Button from "../shared/Button.svelte";
+  import { words, categories } from '../Stores.js';
 
   let filter = '';
-  $: filteredWords = !filter ? [...words] : words.filter(word => word.category._id === filter);
+  $: filteredWords = !filter ? [...$words] : $words.filter(word => word.category._id === filter);
 
   let dispatch = createEventDispatcher();
 
@@ -25,10 +24,11 @@
 
 <Card>
   <h1>Words:</h1>
+  {#if $words && $categories}
   <p>Filter by Category</p>
   <select bind:value={filter}>
     <option value="">None</option>
-    {#each categories as category}
+    {#each $categories as category}
       <option value={category._id}>{category.name}</option>
     {/each}
   </select>
@@ -52,6 +52,7 @@
       </tr>
     {/each}
   </table>
+  {/if}
 </Card>
 
 <style>

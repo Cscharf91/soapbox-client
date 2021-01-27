@@ -1,15 +1,22 @@
 <script>
   import Button from "../shared/Button.svelte";
   import Card from "../shared/Card.svelte";
-  export let API;
-  import { phrases } from '../Stores.js';
-  import { createEventDispatcher } from "svelte";
-
+  import { createEventDispatcher, onMount } from "svelte";
+  import Link from "svelte-routing/src/Link.svelte";
+  
+  let prompts = [];
   let dispatch = createEventDispatcher();
+
+  let API = 'https://stormy-fortress-52595.herokuapp.com/api';
+
+  onMount(async () => {
+    const res = await fetch(`${API}/prompts`);
+    prompts = await res.json();
+  })
 
   const deletePhrase = async (id) => {
     try {
-      await fetch(`${API}/phrases/${id}`, {
+      await fetch(`${API}/prompts/${id}`, {
         method: 'DELETE',
       });
       dispatch('DELETE', id);
@@ -20,18 +27,18 @@
 </script>
 
 <Card>
-  <h1>Phrases:</h1>
+  <h1>Prompts:</h1>
   <table>
     <tr>
       <th>Body</th>
       <th>Options</th>
     </tr>
-    {#each $phrases as phrase}
+    {#each prompts as prompt}
       <tr>
-      <td>{phrase.direction === 'left' ? '___' : ''} {phrase.body} {phrase.direction === 'right' ? '___' : ''}</td>
+      <Link to="/prompts/{prompt._id}"><td>{prompt.body}</td></Link>
         <td>
-          <form on:submit|preventDefault={() => deletePhrase(phrase._id)}>
-            <Button type="primary">Delete Phrase</Button>
+          <form on:submit|preventDefault={() => deletePhrase(prompt._id)}>
+            <Button type="primary">Delete Prompt</Button>
           </form>
         </td>
       </tr>

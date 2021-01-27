@@ -1,8 +1,59 @@
 <script>
+import { onMount } from 'svelte';
+
 	import { Router, Link, Route } from 'svelte-routing';
 	import Create from './components/Create.svelte';
+	import Prompt from './components/Prompt.svelte';
+	import Prompts from './components/Prompts.svelte';
+  import { words, phrases, categories, prompts } from './Stores.js';
+	
+	import axios from 'axios';
 
-  export let url = "";
+	export let url = "";
+  let API = 'https://stormy-fortress-52595.herokuapp.com/api';
+	
+	onMount(async () => {
+		await getWords();
+		await getCategories();
+		await getPrompts();
+		await getPhrases();
+	})
+
+	const getWords = async () => {
+		try {
+			const { data } = await axios.get(`${API}/words`);
+			$words = data;
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	const getCategories = async () => {
+		try {
+			const { data } = await axios.get(`${API}/categories`);
+			$categories = data;
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	const getPrompts = async () => {
+		try {
+			const { data } = await axios.get(`${API}/prompts`);
+			$prompts = data;
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	const getPhrases = async () => {
+		try {
+			const { data } = await axios.get(`${API}/phrases`);
+			$phrases = data;
+		} catch (err) {
+			console.log(err);
+		}
+	}
 </script>
 
 <Router url="{url}">
@@ -12,7 +63,11 @@
 			<Link to="/create"><p>Teacher Portal</p></Link>
 		</div>
 	</div>
+	<Route path="/" component="{Prompts}" />
 	<Route path="/create" component="{Create}" />
+	<Route path="/prompts/:id" let:params>
+		<Prompt id={params.id} />
+	</Route>
 
 </Router>
 

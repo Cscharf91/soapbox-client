@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import Button from "../shared/Button.svelte";
-  export let categories = [];
+  import { categories } from '../Stores.js';
 
   let dispatch = createEventDispatcher();
   let fields = { word: "", type: "", category: "" };
@@ -100,7 +100,7 @@
     <label for="category">Category:</label>
     <select id="category" bind:value={fields.category}>
       <option value="">Select Category</option>
-      {#each categories as category(category._id)}
+      {#each $categories as category(category._id)}
         <option value={category._id}>{category.name.toLowerCase()}</option>
       {/each}
     </select>
