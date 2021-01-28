@@ -35,13 +35,12 @@
   const handleAdd = async (e) => {
     const { body, nickname } = e.detail
     const newSoapstone = { body, nickname, prompt: id };
-    console.log(newSoapstone);
-    // try {
-    //   const { data } = await axios.post(`${API}/soapstones`, newSoapstone);
-    //   soapstones = [data, ...soapstones];
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const { data } = await axios.post(`${API}/soapstones`, newSoapstone);
+      soapstones = [data, ...soapstones];
+    } catch (err) {
+      console.log(err);
+    }
   };
 </script>
 
