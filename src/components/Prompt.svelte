@@ -76,11 +76,13 @@
   <table>
     <tr>
       <th>Body</th>
+      <th>Author</th>
       <th>Options</th>
     </tr>
     {#each soapstones as soapstone (soapstone._id)}
       <tr>
         <td>{soapstone.body}</td>
+        <td>{soapstone.nickname}</td>
         <td>
           <form on:submit|preventDefault={() => deleteSoapstone(soapstone._id)}>
             <Button type="primary">Delete Prompt</Button>
