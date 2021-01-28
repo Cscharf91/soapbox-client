@@ -9,7 +9,7 @@
 	import CreatePhraseForm from './CreatePhraseForm.svelte';
 	import Phrases from './Phrases.svelte';
 	import CreateSoapstoneForm from './CreateSoapstoneForm.svelte';
-import CreatePrompt from './CreatePrompt.svelte';
+  import CreatePrompt from './CreatePrompt.svelte';
 
   let items = ['Prompts', 'Soapstone', 'Categories', 'Words', 'Phrases'];
   let activeItem = 'Prompts';
@@ -18,6 +18,7 @@ import CreatePrompt from './CreatePrompt.svelte';
   // let API = 'http://localhost:5000/api';
 
   import { words, phrases, categories, prompts } from '../Stores.js';
+import Prompts from './Prompts.svelte';
 
   const handleTabChange = (e) => {
     activeItem = e.detail;
@@ -49,6 +50,20 @@ import CreatePrompt from './CreatePrompt.svelte';
     });
     const data = await res.json();
     $phrases = [data, ...$phrases];
+  }
+
+  const handleAddPrompt = async (e) => {
+    const newPrompt = e.detail;
+    const res = await fetch(`${API}/prompts`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newPrompt)
+    });
+    const data = await res.json();
+    $prompts = [data, ...$prompts];
   }
 
   const handleAddWord = async (e) => {
@@ -96,5 +111,6 @@ import CreatePrompt from './CreatePrompt.svelte';
   <CreatePhraseForm on:add={handleAddPhrase} />
   <Phrases {API} on:DELETE={handleDeletePhrase} />
 {:else}
-  <CreatePrompt />
+  <CreatePrompt on:add={handleAddPrompt} />
+  <Prompts teacher={true} />
 {/if}

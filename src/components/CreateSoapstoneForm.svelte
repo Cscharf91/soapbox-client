@@ -10,6 +10,7 @@
     "and then",
     "therefore",
     "or",
+    "because",
     // ",",
     "only",
     "by the way",
@@ -23,7 +24,7 @@
 
   let dispatch = createEventDispatcher();
   let fields = {
-    // creator: "",
+    nickname: "",
     phrase1: "",
     word1: "",
     conjunction: "",
@@ -31,6 +32,7 @@
     word2: "",
   };
   let errors = {
+    nickname: "",
     phrase1: "",
     word1: "",
     conjunction: "",
@@ -41,6 +43,13 @@
 
   const handleSubmit = () => {
     valid = true;
+
+    if (fields.nickname.length < 2) {
+      valid = false;
+      errors.nickname = "Nickname must be at least 2 characters.";
+    } else {
+      errors.nickname = "";
+    }
 
     if (!fields.word1.word) {
       valid = false;
@@ -57,7 +66,14 @@
     }
 
     if (valid) {
-      const newSentence = `${fields.phrase1.direction === 'left' ? fields.word1.word || "***" : fields.phrase1 && fields.phrase1.body} ${fields.phrase1.direction === 'right' ? fields.word1.word || "***" : fields.phrase1 && fields.phrase1.body} ${fields.conjunction && fields.conjunction} ${fields.phrase2.direction === 'left' ? fields.word2.word || "***" : fields.phrase2 && fields.phrase2.body} ${fields.phrase2.direction === 'right' ? fields.word2.word || "***" : fields.phrase2 && fields.phrase2.body}`;
+      const newSentence = { nickname: fields.nickname, body: `${fields.phrase1.direction === 'left' ? fields.word1.word || "***" : fields.phrase1 && fields.phrase1.body} ${fields.phrase1.direction === 'right' ? fields.word1.word || "***" : fields.phrase1 && fields.phrase1.body} ${fields.conjunction && fields.conjunction} ${fields.phrase2.direction === 'left' ? fields.word2.word || "***" : fields.phrase2 && fields.phrase2.body} ${fields.phrase2.direction === 'right' ? fields.word2.word || "***" : fields.phrase2 && fields.phrase2.body}` };
+      fields = {
+        phrase1: "",
+        word1: "",
+        conjunction: "",
+        phrase2: "",
+        word2: "",
+      };
       dispatch("add", newSentence);
     }
   };
@@ -94,6 +110,10 @@
       {fields.phrase2.direction === 'left' ? fields.word2.word || "***" : fields.phrase2 && fields.phrase2.body}
       {fields.phrase2.direction === 'right' ? fields.word2.word || "***" : fields.phrase2 && fields.phrase2.body}
     </h1>
+    <div class="form-field">
+      <label for="nickname">Nickname:</label>
+      <input type="text" id="nickname" bind:value={fields.nickname}>
+    </div>
     <div class="form-field">
       <label for="phrase1">Phrase:</label>
       <select id="phrase1" bind:value={fields.phrase1}>

@@ -19,7 +19,6 @@
 
     if (valid) {
       let newPrompt = { ...fields };
-      console.log(newPrompt);
       fields = { body: "" };
       dispatch("add", newPrompt);
     }
