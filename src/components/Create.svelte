@@ -11,7 +11,7 @@
 	import CreateSoapstoneForm from './CreateSoapstoneForm.svelte';
   import CreatePrompt from './CreatePrompt.svelte';
 
-  let items = ['Prompts', 'Soapstone', 'Categories', 'Words', 'Phrases'];
+  let items = ['Prompts', 'Categories', 'Words', 'Phrases'];
   let activeItem = 'Prompts';
 
   let API = 'https://stormy-fortress-52595.herokuapp.com/api';
@@ -105,8 +105,6 @@ import Prompts from './Prompts.svelte';
 {:else if activeItem === 'Words'}
   <CreateWordForm on:add={handleAddWord} />
   <Words {API} on:DELETE={handleDeleteWord} />
-{:else if activeItem === 'Soapstone'}
-  <CreateSoapstoneForm />
 {:else if activeItem === 'Phrases'}
   <CreatePhraseForm on:add={handleAddPhrase} />
   <Phrases {API} on:DELETE={handleDeletePhrase} />
